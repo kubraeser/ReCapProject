@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Constants;
 using DataAccess.Concrete.Entity_Framework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -11,44 +12,30 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarTest();
 
             //ColorTest();
 
             //BrandTest();
 
-            //BrandManager brandManager = new BrandManager(new EfBrandDal());
-            //CarManager carManager = new CarManager(new EfCarDal());
-            //ColorManager colorManager = new ColorManager(new EfColorDal());
+            RentalTest();
 
+        }
 
-
-            //Brand brand1 = new Brand { BrandName = "Opel" };
-            //Brand brand2 = new Brand { BrandName = "Toyoto" };
-            //Brand brand3 = new Brand { BrandName = "Suzuki" };
-            //Brand brand4 = new Brand { BrandName = "BMW" };
-            //Brand brand5 = new Brand { BrandName = "Ford" };
-
-            //brandManager.Add(brand1);
-            //brandManager.Add(brand2);
-            //brandManager.Add(brand3);
-            //brandManager.Add(brand4);
-            //brandManager.Add(brand5);
-
-            //Color color1 = new Color { ColorName = "kırmızı" };
-            //Color color2 = new Color { ColorName = "siyah" };
-            //Color color3 = new Color { ColorName = "beyaz" };
-            //Color color4 = new Color { ColorName = "gri" };
-            //Color color5 = new Color { ColorName = "mavi" };
-
-            //colorManager.Add(color1);
-            //colorManager.Add(color2);
-            //colorManager.Add(color3);
-            //colorManager.Add(color4);
-            //colorManager.Add(color5);
-
-
-        
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Rental rental = new Rental { CarId = 3, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = DateTime.Today , CarName = "Toyota", CustomerName = "Beyza" };
+            var result = rentalManager.Add(rental);
+            var result2 = rentalManager.GetCarDetails();
+            if (result.Success == true && result2.Success == true)
+            {
+                Console.WriteLine(Messages.RentalAdded);
+            }
+            else
+            {
+                Console.WriteLine(Messages.AddError);
+            }
         }
 
         private static void BrandTest()
