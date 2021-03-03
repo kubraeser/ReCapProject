@@ -18,7 +18,20 @@ namespace ConsoleUI
 
             //BrandTest();
 
-            RentalTest();
+            //RentalTest();
+
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car car = new Car { BrandId = 6, ColorId = 6, DailyPrice = 6000, Description = "Audi", ModelYear = "2006" };
+            var result = carManager.Add(car);
+            if (result.Success)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
 
         }
 

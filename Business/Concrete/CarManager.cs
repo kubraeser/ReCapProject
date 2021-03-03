@@ -22,11 +22,13 @@ namespace Business.Concrete
         public IResult Add(Car car)
         {
             //business codes
-            if (car.Description.Length<2)
+            if (car.Description.Length>2)
             {
-                return new ErrorResult(Messages.CarNameInvalid);
+                _carDal.Add(car);
+                return new SuccessResult(Messages.CarAdded);
             }
-            return new SuccessResult(Messages.CarAdded);
+            return new ErrorResult(Messages.CarNameInvalid);
+
         }
 
         public IResult Delete(Car car)
